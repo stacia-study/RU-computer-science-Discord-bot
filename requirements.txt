@@ -1,0 +1,21 @@
+# database
+asyncpg
+
+# http
+aiohttp
+
+# config
+python-dotenv
+
+# discord
+discord.py @ git+https://github.com/Rapptz/discord.py.git@master
+discord-ext-munus @ git+https://github.com/Rapptz/discord-ext-menus@master
+jishaku @ git+https://github.com/Gorialis/jishaku@master
+
+# utils
+psutil
+typing_extensions
+
+# unsorted
+pygit2
+uvloop; sys_platform != 'win32'
