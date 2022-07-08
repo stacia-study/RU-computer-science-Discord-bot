@@ -13,6 +13,7 @@ except ImportError:
 
 from bot import RU_COMSCI_bot
 
+
 class Jishaku(*OPTIONAL_FEATURES, *STANDARD_FEATURES):
 
     @Feature.Command(name="jishaku", aliases=["jsk"], invoke_without_command=True, ignore_extra=False)
@@ -119,6 +120,7 @@ class Jishaku(*OPTIONAL_FEATURES, *STANDARD_FEATURES):
         embed.description = "\n".join(summary)
 
         await ctx.send(embed=embed)
+
 
 async def setup(bot: RU_COMSCI_bot) -> None:
     await bot.add_cog(Jishaku(bot=bot))

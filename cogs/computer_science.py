@@ -23,33 +23,33 @@ class ComputerScience(commands.Cog):
     # add choice ['decode', 'encode'] or not ?
 
     # @commands.hybrid_command(aliases=['bin'])
-    # async def binary(self, ctx: commands.Context, *, texts: str):
+    # async def binary(self, ctx: commands.Context, *, texts: str) -> None:
     #     """ แปลงข้อความเป็นเลขฐาน 2 """
     #     ...
     #
     # @commands.hybrid_command(aliases=['hex'])
-    # async def hexadecimal(self, ctx: commands.Context, *, texts: str):
+    # async def hexadecimal(self, ctx: commands.Context, *, texts: str)-> None:
     #     """ แปลงข้อความเป็นเลขฐาน 16 """
     #     ...
     #
     # @commands.hybrid_command(aliases=['oct'])
-    # async def octal(self, ctx: commands.Context, *, texts: str):
+    # async def octal(self, ctx: commands.Context, *, texts: str)-> None:
     #     """ แปลงข้อความเป็นเลขฐาน 8 """
     #     ...
     #
     # @commands.hybrid_command(aliases=['dec'])
-    # async def decimal(self, ctx: commands.Context, *, texts: str):
+    # async def decimal(self, ctx: commands.Context, *, texts: str) -> None:
     #     """ แปลงข้อความเป็นเลขฐาน 10 """
     #     ...
 
     @commands.hybrid_command(aliases=['py'])
-    async def python(self, ctx: commands.Context, *, code: str):
+    async def python(self, ctx: commands.Context, *, code: str) -> None:
         """ jishaku py"""
         jsk = self.bot.get_command("jishaku py")
         await jsk(ctx, argument=codeblock_converter(code))
 
     @commands.hybrid_command(aliases=['cal'])
-    async def calculate(self, ctx: commands.Context, *, equation: str):
+    async def calculate(self, ctx: commands.Context, *, equation: str) -> None:
         """ เครื่องคิดเลข """
 
         if not equation:
@@ -66,5 +66,5 @@ class ComputerScience(commands.Cog):
         )
         await ctx.reply(embed=embed, allowed_mentions=discord.AllowedMentions().none())
 
-async def setup(bot: RU_COMSCI_bot):
+async def setup(bot: RU_COMSCI_bot) -> None:
     await bot.add_cog(ComputerScience(bot))

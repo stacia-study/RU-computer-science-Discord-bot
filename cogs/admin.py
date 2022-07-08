@@ -25,7 +25,7 @@ class Admin(commands.Cog):
 
     @app_commands.command()
     @owner_only()
-    async def prepare(self, interaction: Interaction):
+    async def prepare(self, interaction: Interaction) -> None:
         """ Prepare role persistent view """
 
         await interaction.response.defer(ephemeral=True)
@@ -76,7 +76,7 @@ class Admin(commands.Cog):
     @app_commands.command()
     @app_commands.describe(extension='extension name')
     @owner_only()
-    async def load(self, interaction: Interaction, extension: str):
+    async def load(self, interaction: Interaction, extension: str) -> None:
         """Loads an extension."""
 
         try:
@@ -93,7 +93,7 @@ class Admin(commands.Cog):
     @app_commands.command()
     @app_commands.describe(extension='extension name')
     @owner_only()
-    async def unload(self, interaction: Interaction, extension: str):
+    async def unload(self, interaction: Interaction, extension: str) -> None:
         """Unloads an extension."""
 
         try:
@@ -110,7 +110,7 @@ class Admin(commands.Cog):
     @app_commands.command(name='reload')
     @app_commands.describe(extension='extension name')
     @owner_only()
-    async def reload_(self, interaction: Interaction, extension: str):
+    async def reload_(self, interaction: Interaction, extension: str) -> None:
         """Reloads an extension."""
 
         try:

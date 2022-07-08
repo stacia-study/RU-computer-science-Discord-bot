@@ -80,5 +80,5 @@ class Misc(commands.Cog):
         await interaction.response.send_message(embed=embed)
 
 
-async def setup(bot: RU_COMSCI_bot):
+async def setup(bot: RU_COMSCI_bot) -> None:
     await bot.add_cog(Misc(bot))

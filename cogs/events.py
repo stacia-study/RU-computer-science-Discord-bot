@@ -17,5 +17,5 @@ class Event(commands.Cog):
         self.bot: RU_COMSCI_bot = bot
 
 
-async def setup(bot: RU_COMSCI_bot):
+async def setup(bot: RU_COMSCI_bot) -> None:
     await bot.add_cog(Event(bot))

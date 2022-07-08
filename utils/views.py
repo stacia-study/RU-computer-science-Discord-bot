@@ -28,7 +28,7 @@ class RURolePersistentView(ui.View):
         await interaction.user.remove_roles(role)
 
     @discord.ui.button(label='นักศึกษา', emoji='👩‍🎓', style=discord.ButtonStyle.blurple, custom_id='persistent_view:ru_cs_64')
-    async def student(self, interaction: discord.Interaction, button: discord.ui.Button):
+    async def ru_cs_student(self, interaction: discord.Interaction, button: discord.ui.Button):
 
         await interaction.response.defer(ephemeral=True)
 

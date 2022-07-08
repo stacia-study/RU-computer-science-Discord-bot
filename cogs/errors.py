@@ -20,6 +20,7 @@ from typing import Union, TYPE_CHECKING
 if TYPE_CHECKING:
     from bot import RU_COMSCI_bot
 
+
 class ErrorHandler(commands.Cog):
     """Error handler"""
 
@@ -33,7 +34,8 @@ class ErrorHandler(commands.Cog):
         traceback.print_exception(type(error), error, error.__traceback__)
 
         error_unknown = "An unknown error occurred, sorry"
-        if isinstance(error, CommandInvokeError) and not isinstance(error, (KeyError,ValueError,TypeError, IndexError, AttributeError)):
+        if isinstance(error, CommandInvokeError) and not isinstance(error, (
+        KeyError, ValueError, TypeError, IndexError, AttributeError)):
             error = error.original
         elif isinstance(error, Union[CommandNotFound, MissingPermissions, BotMissingPermissions]):
             error = error
@@ -56,7 +58,7 @@ class ErrorHandler(commands.Cog):
             await interaction.response.send_message(embed=embed, ephemeral=True)
 
     @commands.Cog.listener()
-    async def on_command_error(self, ctx: commands.Context, error: Exception):
+    async def on_command_error(self, ctx: commands.Context, error: Exception) -> None:
 
         embed = discord.Embed(color=self.bot.theme)
 
@@ -93,5 +95,6 @@ class ErrorHandler(commands.Cog):
         embed.description = cm_error
         await ctx.send(embed=embed, delete_after=30, ephemeral=True)
 
-async def setup(bot: RU_COMSCI_bot):
+
+async def setup(bot: RU_COMSCI_bot) -> None:
     await bot.add_cog(ErrorHandler(bot))

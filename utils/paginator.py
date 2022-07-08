@@ -232,7 +232,7 @@ class TextPageSource(menus.ListPageSource):
 
         super().__init__(entries=pages.pages, per_page=1)
 
-    async def format_page(self, menu, content):
+    async def format_page(self, menu, content) -> str:
         maximum = self.get_max_pages()
         if maximum > 1:
             return f'{content}\nPage {menu.current_page + 1}/{maximum}'
@@ -240,7 +240,7 @@ class TextPageSource(menus.ListPageSource):
 
 
 class SimplePageSource(menus.ListPageSource):
-    async def format_page(self, menu, entries):
+    async def format_page(self, menu, entries) -> discord.Embed:
         pages = []
         for index, entry in enumerate(entries, start=menu.current_page * self.per_page):
             pages.append(f'{index + 1}. {entry}')

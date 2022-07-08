@@ -96,7 +96,7 @@ class TagCommands(commands.Cog, name='Tags'):
             *,
             connection: Optional[asyncpg.Pool | asyncpg.Connection] = None,
     ) -> TagEntry:
-        def disambiguate(rows, query):
+        def disambiguate(rows, query) -> str:
             if rows is None or len(rows) == 0:
                 raise RuntimeError('ไม่พบแท็ก')
 
@@ -144,7 +144,7 @@ class TagCommands(commands.Cog, name='Tags'):
     @app_commands.describe(name='แท็ก')
     @app_commands.guild_only()
     @commands.guild_only()
-    async def tag(self, ctx: GuildContext, *, name: Annotated[str, TagName(lower=True)]):
+    async def tag(self, ctx: GuildContext, *, name: Annotated[str, TagName(lower=True)]) -> None:
         """ คำสั่งแท็ก """
         try:
             tag = await self.get_tag(ctx.guild.id, name, connection=ctx.db)
@@ -159,7 +159,7 @@ class TagCommands(commands.Cog, name='Tags'):
     @commands.guild_only()
     async def create(
             self, ctx: GuildContext, name: Annotated[str, TagName], *, content: Annotated[str, commands.clean_content]
-    ):
+    ) -> None:
         """ สร้างแท็ก """
         if len(content) > 2000:
             return await ctx.send('เนื้อหาแท็กมีความยาวสูงสุด 2,000 อักขระ')
@@ -176,7 +176,7 @@ class TagCommands(commands.Cog, name='Tags'):
             name: Annotated[str, TagName(lower=True)],
             *,
             content: Annotated[str, commands.clean_content],
-    ):
+    ) -> None:
         """ แก้ไขแท็ก """
         query = "UPDATE rucs_tags SET content=$1 WHERE LOWER(name)=$2 AND guild_id=$3 AND owner_id=$4;"
         status = await ctx.db.execute(query, content, name, ctx.guild.id, ctx.author.id)
@@ -190,7 +190,7 @@ class TagCommands(commands.Cog, name='Tags'):
     @app_commands.describe(name='แท็ก')
     @app_commands.guild_only()
     @commands.guild_only()
-    async def remove(self, ctx: GuildContext, *, name: Annotated[str, TagName(lower=True)]):
+    async def remove(self, ctx: GuildContext, *, name: Annotated[str, TagName(lower=True)]) -> None:
         """ ลบแท็ก """
 
         bypass_owner_check = ctx.author.id == self.bot.owner_id or ctx.author.guild_permissions.manage_messages
@@ -216,7 +216,7 @@ class TagCommands(commands.Cog, name='Tags'):
     @app_commands.guild_only()
     @commands.guild_only()
     async def rename(self, ctx: GuildContext, old_name: Annotated[str, TagName], *,
-                     new_name: Annotated[str, TagName], ):
+                     new_name: Annotated[str, TagName]) -> None:
         """ เปลี่ยนชื่อแท็ก """
         if old_name.lower() == new_name.lower():
             return await ctx.send('ไม่สามารถเปลี่ยนชื่อแท็กให้เหมือนกันได้')
@@ -251,7 +251,7 @@ class TagCommands(commands.Cog, name='Tags'):
     @app_commands.describe(member="ผู้ใช้ที่ต้องการดูแท็ก")
     @app_commands.guild_only()
     @commands.guild_only()
-    async def _list(self, ctx: GuildContext, member: Optional[discord.Member] = None):
+    async def _list(self, ctx: GuildContext, member: Optional[discord.Member] = None) -> None:
         """ ดูแท็กทั่งหมด หรือ ดูแท็กของผู้ใช้ที่ระบุ """
 
         clause = 'guild_id=$1'
@@ -278,7 +278,7 @@ class TagCommands(commands.Cog, name='Tags'):
     @app_commands.describe(query="คำค้นหาแท็ก")
     @app_commands.guild_only()
     @commands.guild_only()
-    async def search(self, ctx: GuildContext, *, query: Annotated[str, commands.clean_content]):
+    async def search(self, ctx: GuildContext, *, query: Annotated[str, commands.clean_content]) -> None:
         """ ค้นหาแท็ก """
         if len(query) < 3:
             return await ctx.send('ข้อความค้นหาต้องมีอย่าง 3 อักขระ')
@@ -304,7 +304,7 @@ class TagCommands(commands.Cog, name='Tags'):
     @app_commands.describe(name='ชื่อแท็ก')
     @app_commands.guild_only()
     @commands.guild_only()
-    async def info(self, ctx: GuildContext, *, name: Annotated[str, TagName(lower=True)]):
+    async def info(self, ctx: GuildContext, *, name: Annotated[str, TagName(lower=True)]) -> None:
         """ ดูข้อมูลแท็ก """
 
         query = """SELECT * FROM rucs_tags WHERE LOWER(name)=$1 AND guild_id=$2"""
