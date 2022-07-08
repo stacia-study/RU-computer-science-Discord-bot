@@ -9,7 +9,7 @@ python-dotenv
 
 # discord
 discord.py @ git+https://github.com/Rapptz/discord.py.git@master
-discord-ext-munus @ git+https://github.com/Rapptz/discord-ext-menus@master
+discord-ext-menus @ git+https://github.com/Rapptz/discord-ext-menus@master
 jishaku @ git+https://github.com/Gorialis/jishaku@master
 
 # utils
